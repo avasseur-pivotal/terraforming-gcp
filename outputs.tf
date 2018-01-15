@@ -102,8 +102,28 @@ output "http_lb_backend_name" {
   value = "${google_compute_backend_service.http_lb_backend_service.name}"
 }
 
+output "ssl_cert" {
+  sensitive = true
+  value     = "${length(var.ssl_ca_cert) > 0 ? element(concat(tls_locally_signed_cert.ssl_cert.*.cert_pem, list("")), 0) : var.ssl_cert}"
+}
+
+output "ssl_private_key" {
+  sensitive = true
+  value     = "${length(var.ssl_ca_cert) > 0 ? element(concat(tls_private_key.ssl_private_key.*.private_key_pem, list("")), 0) : var.ssl_private_key}"
+}
+
 output "isoseg_lb_backend_name" {
   value = "${module.isolation_segment.load_balancer_name}"
+}
+
+output "iso_seg_ssl_cert" {
+  sensitive = true
+  value     = "${module.isolation_segment.ssl_cert}"
+}
+
+output "iso_seg_ssl_private_key" {
+  sensitive = true
+  value     = "${module.isolation_segment.ssl_private_key}"
 }
 
 output "ws_router_pool" {
@@ -119,19 +139,19 @@ output "tcp_router_pool" {
 }
 
 output "buildpacks_bucket" {
-  value = "${google_storage_bucket.buildpacks.name}"
+  value = "${element(concat(google_storage_bucket.buildpacks.*.name, list("")), 0)}"
 }
 
 output "droplets_bucket" {
-  value = "${google_storage_bucket.droplets.name}"
+  value = "${element(concat(google_storage_bucket.droplets.*.name, list("")), 0)}"
 }
 
 output "packages_bucket" {
-  value = "${google_storage_bucket.packages.name}"
+  value = "${element(concat(google_storage_bucket.packages.*.name, list("")), 0)}"
 }
 
 output "resources_bucket" {
-  value = "${google_storage_bucket.resources.name}"
+  value = "${element(concat(google_storage_bucket.resources.*.name, list("")), 0)}"
 }
 
 output "director_blobstore_bucket" {
