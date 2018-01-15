@@ -8,6 +8,8 @@ resource "google_compute_subnetwork" "management-subnet" {
   ip_cidr_range = "${var.management_cidr}"
   network       = "${google_compute_network.pcf-network.self_link}"
   region        = "${var.region}"
+  // Alex: not clear if we need the below
+  private_ip_google_access = true
 }
 
 resource "google_compute_subnetwork" "pas-subnet" {
