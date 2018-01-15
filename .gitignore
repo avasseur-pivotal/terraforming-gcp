@@ -4,3 +4,4 @@ keys
 *.tfstate
 terraform.key.json
 *.tfvars
+plan
