@@ -3,7 +3,6 @@ resource "google_storage_bucket" "buildpacks" {
   location      = "${var.buckets_location}"
   force_destroy = true
   count         = "${var.create_gcs_buckets ? 1 : 0}"
-  location = "EU"
 }
 
 resource "google_storage_bucket" "droplets" {
@@ -11,7 +10,6 @@ resource "google_storage_bucket" "droplets" {
   location      = "${var.buckets_location}"
   force_destroy = true
   count         = "${var.create_gcs_buckets ? 1 : 0}"
-  location = "EU"
 }
 
 resource "google_storage_bucket" "packages" {
@@ -19,7 +17,6 @@ resource "google_storage_bucket" "packages" {
   location      = "${var.buckets_location}"
   force_destroy = true
   count         = "${var.create_gcs_buckets ? 1 : 0}"
-  location = "EU"
 }
 
 resource "google_storage_bucket" "resources" {
@@ -27,5 +24,4 @@ resource "google_storage_bucket" "resources" {
   location      = "${var.buckets_location}"
   force_destroy = true
   count         = "${var.create_gcs_buckets ? 1 : 0}"
-  location = "EU"
 }
