@@ -23,7 +23,7 @@ resource "google_compute_address" "cf-pks-harbor" {
 // TCP target pool
 resource "google_compute_target_pool" "cf-pks-harbor" {
   name = "${var.env_name}-cf-pks-harbor"
-  instances = [ ] // leave empty - BOSH will manage thru the tile
+  //instances = [ ] // leave commented out - not just empty - BOSH will manage thru the tile
 }
 
 // TCP forwarding rule
