@@ -1,0 +1,50 @@
+env_name         = "gcp"
+region           = "europe-west1"
+#opsman_image_url = "https://storage.googleapis.com/ops-manager-eu/pcf-gcp-2.0-build.249.tar.gz"
+opsman_image_url = "https://storage.googleapis.com/ops-manager-eu/pcf-gcp-2.1-build.326.tar.gz"
+bastion_image_url = "https://storage.googleapis.com/ops-manager-eu/pcf-gcp-2.0-build.206.tar.gz"
+zones            = ["europe-west1-b", "europe-west1-c", "europe-west1-d"]
+project          = "fe-avasseur"
+dns_suffix       = "cf.vasseur.me"
+
+buckets_location = "EU"
+
+ssl_cert = <<SSL_CERT
+-----BE  GIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+SSL_CERT
+
+ssl_private_key = <<SSL_KEY
+-----BE  GIN RSA PRIVATE KEY-----
+...
+-----END RSA PRIVATE KEY-----
+SSL_KEY
+
+service_account_key = <<SERVICE_ACCOUNT_KEY
+{
+  "type": "service_account",
+  "project_id": "fe-avasseur",
+  "private_key_id": "...",
+  "private_key": "-----BE  GIN PRIVATE KEY-----\nMIIEvQ ... oTveTDZk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "southemea@fe-avasseur.iam.gserviceaccount.com",
+  "client_id": "...",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/southemea%40fe-avasseur.iam.gserviceaccount.com"
+}
+SERVICE_ACCOUNT_KEY
+
+# CIDR Ranges for Subnets
+management_cidr = "10.0.2.0/26"
+pas_cidr = "10.0.4.0/24"
+pks_cidr = "10.0.12.0/24"
+services_cidr = "10.0.8.0/24"
+
+# External Database, default is `false`
+external_database = false
+
+# External Storage Buckets, default is `true`
+create_gcs_buckets = true
+
