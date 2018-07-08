@@ -24,7 +24,7 @@ resource "google_compute_address" "cf-pks-xyzc3" {
 // TCP target pool
 resource "google_compute_target_pool" "cf-pks-xyzc3" {
   name = "${var.env_name}-cf-pks-xyzc3"
-  instances = [ "europe-west1-b/vm-9b580d62-aee4-47ca-5f2a-b6294b8561a0" ]
+  instances = [ "europe-west1-b/vm-3bdd2213-be1b-4cd7-5aed-6a27fedfab07" ]
 }
 
 // TCP forwarding rule

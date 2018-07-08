@@ -8,7 +8,7 @@ resource "google_compute_address" "cf-pks-xyzetienne" {
 // TCP target pool
 resource "google_compute_target_pool" "cf-pks-xyzetienne" {
   name = "${var.env_name}-cf-pks-xyzetienne"
-  instances = [ "europe-west1-b/vm-5012f189-7c52-42d1-74dd-0853cb79dee1" ]
+  instances = [ "europe-west1-b/vm-87d91744-1902-466b-561e-077499d11f65" ]
 }
 
 // TCP forwarding rule
