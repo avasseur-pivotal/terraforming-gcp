@@ -5,6 +5,12 @@ variable "project" {
 variable "env_name" {
   type = "string"
 }
+variable "env_name_pas" {
+  type = "string"
+}
+variable "env_name_pks" {
+  type = "string"
+}
 
 variable "region" {
   type = "string"
@@ -38,6 +44,14 @@ variable "zones" {
 }
 
 variable "opsman_image_url" {
+  type        = "string"
+  description = "location of ops manager image on google cloud storage"
+}
+variable "opsman-pas_image_url" {
+  type        = "string"
+  description = "location of ops manager image on google cloud storage"
+}
+variable "opsman-pks_image_url" {
   type        = "string"
   description = "location of ops manager image on google cloud storage"
 }

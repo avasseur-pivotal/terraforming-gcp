@@ -1,23 +1,25 @@
-variable "bastion_image_url" {
+/*
+variable "opsman_image_url" {
   type        = "string"
   description = "location of ops manager image on google cloud storage"
 }
+*/
 
-resource "google_compute_address" "bastion-ip" {
-  name = "${var.env_name}-bastion-ip"
+resource "google_compute_address" "opsman-pas-ip" {
+  name = "${var.env_name}-opsman-pas-ip"
 }
 
-resource "google_compute_image" "bastion-image" {
-  name           = "${var.env_name}-bastion-image"
+resource "google_compute_image" "opsman-pas-image" {
+  name           = "${var.env_name}-opsman-pas-image"
   create_timeout = 20
 
   raw_disk {
-    source = "${var.bastion_image_url}"
+    source = "${var.opsman-pas_image_url}"
   }
 }
 
-resource "google_compute_instance" "bastion" {
-  name           = "${var.env_name}-bastion"
+resource "google_compute_instance" "opsman-pas" {
+  name           = "${var.env_name}-opsman-pas"
   machine_type   = "${var.opsman_machine_type}"
   zone           = "${element(var.zones, 1)}"
   create_timeout = 10
@@ -27,7 +29,7 @@ resource "google_compute_instance" "bastion" {
   boot_disk {
     initialize_params {
 #     image = "${google_compute_image.ops-manager-image.self_link}"
-      image = "${google_compute_image.bastion-image.self_link}"
+      image = "${google_compute_image.opsman-pas-image.self_link}"
       size  = 50
     }
   }
@@ -36,7 +38,7 @@ resource "google_compute_instance" "bastion" {
     subnetwork = "${google_compute_subnetwork.management-subnet.name}"
 
     access_config {
-      nat_ip = "${google_compute_address.bastion-ip.address}"
+      nat_ip = "${google_compute_address.opsman-pas-ip.address}"
     }
   }
 
@@ -51,12 +53,12 @@ resource "google_compute_instance" "bastion" {
   }
 }
 
-resource "google_dns_record_set" "bastion-dns" {
-  name = "bastion.${google_dns_managed_zone.env_dns_zone_toplevel.dns_name}"
+resource "google_dns_record_set" "opsman-pas-dns" {
+  name = "opsman-pas.${google_dns_managed_zone.env_dns_zone_toplevel.dns_name}"
   type = "A"
   ttl  = 300
 
   managed_zone = "${google_dns_managed_zone.env_dns_zone_toplevel.name}"
 
-  rrdatas = ["${google_compute_instance.bastion.network_interface.0.access_config.0.assigned_nat_ip}"]
+  rrdatas = ["${google_compute_instance.opsman-pas.network_interface.0.access_config.0.assigned_nat_ip}"]
 }

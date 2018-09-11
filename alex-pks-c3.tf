@@ -37,11 +37,11 @@ resource "google_compute_forwarding_rule" "cf-pks-xyzc3" {
 }
 
 resource "google_dns_record_set" "wildcard-pks-dns-xyzc3" {
-  name = "c3.pks.${google_dns_managed_zone.env_dns_zone.dns_name}"
+  name = "c3.${google_dns_managed_zone.env_dns_zone_pks.dns_name}"
   type = "A"
   ttl  = 300
 
-  managed_zone = "${google_dns_managed_zone.env_dns_zone.name}"
+  managed_zone = "${google_dns_managed_zone.env_dns_zone_pks.name}"
 
   rrdatas = ["${google_compute_address.cf-pks-xyzc3.address}"]
 }
